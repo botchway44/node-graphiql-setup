@@ -1,7 +1,11 @@
 const express  = require('express');
-
+const helmet = require('helmet');
+const morgan = require('morgan');
+const MOCK_DATA = require('./data/MOCK_DATA.json');
 
 const app = express();
+app.use(helmet());
+app.use(morgan('dev'));
 
 app.get("/", (req, res) => {
     res.send("Hello World");
