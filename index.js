@@ -1,11 +1,21 @@
 const express  = require('express');
 const helmet = require('helmet');
 const morgan = require('morgan');
-const MOCK_DATA = require('./data/MOCK_DATA.json');
+const schema = require('./schemas/index');
+const {graphqlHTTP} = require('express-graphql');
+
 
 const app = express();
-app.use(helmet());
+// app.use(helmet());
 app.use(morgan('dev'));
+
+
+
+app.use('/graphql', graphqlHTTP({
+    schema,
+    graphiql: true
+}));
+
 
 app.get("/", (req, res) => {
     res.send("Hello World");
